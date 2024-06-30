@@ -116,6 +116,9 @@ while running:
     #출력할 글자 , True, 글자 색상
     screen.blit(timer, (10,10))
 
+    gameover = game_font.render("Game Over", True, (255, 255, 255))
+    screen.blit(gameover, (10, 10))
+
     if total_time - elapsed_time <= 0:
         print("타임아웃")
         running=False
