@@ -11,16 +11,16 @@ pygame.display.set_caption("quiz")
 
 clock = pygame.time.Clock()
 
-background = pygame.image.load(r"C:\Users\wldn2\PycharmProjects\pygame_basic\background.png")
+background = pygame.image.load(r"/pygame_practice/background.png")
 
-character = pygame.image.load(r"C:\Users\wldn2\PycharmProjects\pygame_basic\character.png")
+character = pygame.image.load(r"/pygame_practice/character.png")
 character_size = character.get_rect()
 character_width = character_size[0]
 character_height = character_size[1]
 character_x = (screen_width-70)/2
 character_y = screen_height-70
 
-enemy = pygame.image.load(r"C:\Users\wldn2\PycharmProjects\pygame_basic\enemy.png")
+enemy = pygame.image.load(r"/pygame_practice/enemy.png")
 enemy_size = enemy.get_rect()
 enemy_width = enemy_size[0]
 enemy_height = enemy_size[1]

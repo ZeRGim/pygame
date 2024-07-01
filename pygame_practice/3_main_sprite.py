@@ -11,10 +11,10 @@ screen = pygame.display.set_mode((screen_width,screen_height))
 pygame.display.set_caption("Nado Game")
 
 #배경 이미지 불러오기
-background = pygame.image.load(r'C:\Users\wldn2\PycharmProjects\pygame_basic\background.png')
+background = pygame.image.load(r'/pygame_practice/background.png')
 
 #캐릭터 불러오기
-character=pygame.image.load(r"C:\Users\wldn2\PycharmProjects\pygame_basic\character.png")
+character=pygame.image.load(r"/pygame_practice/character.png")
 character_size= character.get_rect().size
 character_width=character_size[0]
 character_height=character_size[1]
