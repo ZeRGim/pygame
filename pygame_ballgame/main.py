@@ -158,6 +158,61 @@ class Bullet(pygame.sprite.Sprite):
     def update(self, mt):
         self.rect.y -= 5
 
+class Effect(pygame.sprite.Sprite):
+
+    def __init__(self, position, direction):
+        super(Effect, self).__init__()
+        size = (23,23)
+
+        images = []
+        images.append(pygame.image.load('sources/attack/effect1.png'))
+        images.append(pygame.image.load('sources/attack/effect2.png'))
+        images.append(pygame.image.load('sources/attack/effect3.png'))
+        images.append(pygame.image.load('sources/attack/effect4.png'))
+        images.append(pygame.image.load('sources/attack/effect5.png'))
+        images.append(pygame.image.load('sources/attack/effect6.png'))
+
+        self.rect=pygame.Rect(position, size)
+
+        self.images = images
+
+        self.images_left = self.images
+        self.images_right = [pygame.transform.flip(image, True, False) for image in images]
+
+        self.direction = direction
+
+        self.index = 0
+        self.image = self.images[self.index]
+
+        self.animation_time = round(100 / len(self.images * 100), 2)
+
+        self.current_time = 0
+
+    def update(self,mt):
+
+        if self.direction == 'right':
+            self.images = self.images_right
+        elif self.direction == 'left':
+            self.images = self.images_left
+
+        self.current_time += mt*10
+
+
+
+        if self.current_time >= self.animation_time:
+            self.current_time = 0
+            self.index += 1
+        if self.index == len(self.images):
+            self.kill()
+            self.index -= 1
+
+        self.image = self.images[self.index]
+
+
+
+
+
+
 def main():
     # player 생성
     player = Character(position=(100, 385))
@@ -187,8 +242,16 @@ def main():
 
                 elif event.key == pygame.K_SPACE:
                     player.state = 2
-                    bullet = Bullet(player.position)
-                    all_sprites.add(bullet)
+                    if player.direction == "left":
+                        bullet = Bullet(player.position)
+                        all_sprites.add(bullet)
+                        effect=Effect((player.position[0]-20, player.position[1]-12), player.direction)
+                        all_sprites.add(effect)
+                    elif player.direction == "right":
+                        bullet = Bullet(((player.position[0]+40), player.position[1]))
+                        all_sprites.add(bullet)
+                        effect = Effect((player.position[0]+40, player.position[1]-12), player.direction)
+                        all_sprites.add(effect)
             elif event.type == pygame.KEYUP:
                 if event.key == pygame.K_RIGHT or event.key == pygame.K_LEFT:
                     player.velocity_x = 0
